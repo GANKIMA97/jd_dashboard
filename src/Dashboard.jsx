@@ -151,9 +151,9 @@ function aggregateMonthly(arr){
 }
 async function fakeFetch(key){await new Promise(r=>setTimeout(r,200));
   switch(key){
-    case '/orders': return [{id:'1001',customer:'Li Hua',status:'Pending',fulfillmentHrs:0,date:'2025-04-20'}];
+    case '/orders': return [{id:'1001',customer:'GANKIMA GOLI',status:'Pending',fulfillmentHrs:0,date:'2025-04-20'}];
     case '/inventory': return [{sku:'SKU-001',name:'Wireless Earbuds',stock:100,channel:'Shopify'}];
-    case '/returns': return [{id:'R-01',customer:'Li Hua',reason:'Defective',status:'Received',date:'2025-04-22',rate:5}];
+    case '/returns': return [{id:'R-01',customer:'GANKIMA GOLI',reason:'Defective',status:'Received',date:'2025-04-22',rate:5}];
     default: return [];
   }
 }
