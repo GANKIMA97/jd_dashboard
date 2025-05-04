@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, createContext, useContext } from 'react';
+
+const TabsContext = createContext();
 
 export function Tabs({ children, defaultValue, className = '' }) {
   const [activeTab, setActiveTab] = useState(defaultValue);
   
   return (
-    <div className={className}>
-      {React.Children.map(children, child => {
-        if (React.isValidElement(child)) {
-          return React.cloneElement(child, { activeTab, setActiveTab });
-        }
-        return child;
-      })}
-    </div>
+    <TabsContext.Provider value={{ activeTab, setActiveTab }}>
+      <div className={className}>
+        {children}
+      </div>
+    </TabsContext.Provider>
   );
 }
 
@@ -23,7 +22,9 @@ export function TabsList({ children, className = '' }) {
   );
 }
 
-export function TabsTrigger({ children, value, activeTab, setActiveTab, className = '' }) {
+export function TabsTrigger({ children, value, className = '' }) {
+  const { activeTab, setActiveTab } = useContext(TabsContext);
+  
   return (
     <button
       className={`px-4 py-2 pb-3 ${
@@ -38,7 +39,9 @@ export function TabsTrigger({ children, value, activeTab, setActiveTab, classNam
   );
 }
 
-export function TabsContent({ children, value, activeTab, className = '' }) {
+export function TabsContent({ children, value, className = '' }) {
+  const { activeTab } = useContext(TabsContext);
+  
   if (value !== activeTab) return null;
   return <div className={className}>{children}</div>;
 }
